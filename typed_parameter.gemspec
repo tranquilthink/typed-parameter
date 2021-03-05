@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.platform              = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 3.0.0'
 
-  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+  # spec.metadata['allowed_push_host'] = "https://github.com/tranquilthink/typed_parameter"
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/tranquilthink/typed_parameter'
   spec.metadata['changelog_uri'] = "https://github.com/tranquilthink/typed_parameter/blob/master/CHANGELOG.md"
