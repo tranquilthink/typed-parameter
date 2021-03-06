@@ -99,9 +99,75 @@ custom_params[:datetime_field] # => is_a? DateTime
 custom_params[:boolean] # => is_a? Boolean, If parameter is string (like "false", "true" "False", "True") then convert true or false
 ~~~
 
-Example 3. Custom Types
+Example 3. Enum & Required
 ---
-....
+~~~ruby
+class EnumAndRequiredParameter < TypedParameter::base
+  field :enum_field, Integer, enum: [10, 20, 30, 40]
+  field :required_field, String, required: true
+end
+
+def enum_and_required_params
+  EnumAndRequiredParameter.permit(params)
+end
+
+# If params[:enum_field] has 25 ( not in 10, 20, 30, 40)
+# => ArgumentError, "enum_field must be in 10, 20, 30, 40"
+
+# if params[:required_field] is Nil
+# => ArgumentError, "required_field is required"
+~~~
+
+Example 4. array & nested parameters 
+
+~~~ruby
+class ParentParameter < TypedParameter::Base
+  field :name, String
+  field :integers, [Integer]
+  field :child, ChildParameter
+  field :childs, [ChildParamter]
+end
+
+class ChildParameter < TypedParameter::Base
+  field :name, String
+end
+
+
+example_params = { 
+  name: "Name", 
+  integers: ['1','2','3','4'], 
+  child: { name: "child" },
+  childs: [ 
+    { name: "child1" },
+    { name: "child2" },
+    { name: "child3" }
+  ]
+}
+
+def parent_and_childs_params
+  ParentParams.permit(example_params)
+end
+
+# Result
+{
+  name: "Name",
+  integers: [1,2,3,4],
+  child: { name: "child" },
+  childs: [ 
+    { name: "child1" },
+    { name: "child2" },
+    { name: "child3" }
+  ]
+}
+
+~~~
+Example 4. CustomType
+------
+...
+
+Example 5. Swaggerize
+------
+...
 
 
 ## Development
