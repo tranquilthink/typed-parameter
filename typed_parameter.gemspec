@@ -1,21 +1,21 @@
 require File.expand_path('lib/typed_parameter/version', __dir__)
 
 Gem::Specification.new do |spec|
-  spec.name                  = 'typed_parameter'
+  spec.name                  = 'typed-parameter'
   spec.version               = TypedParameter::VERSION
   spec.authors               = ['Minwoo Jo']
   spec.email                 = ['tranquilthink@example.com']
   spec.summary               = 'Typed Paramter For Rails'
   spec.description           = 'Create typed parameter class using strong paramter in rails'
-  spec.homepage              = 'https://github.com/tranquilthink/typed_parameter'
+  spec.homepage              = 'https://github.com/tranquilthink/typed-parameter'
   spec.license               = 'MIT'
   spec.platform              = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 3.0.0'
 
-  # spec.metadata['allowed_push_host'] = "https://github.com/tranquilthink/typed_parameter"
+  # spec.metadata['allowed_push_host'] = "https://github.com/tranquilthink/typed-parameter"
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/tranquilthink/typed_parameter'
-  spec.metadata['changelog_uri'] = "https://github.com/tranquilthink/typed_parameter/blob/master/CHANGELOG.md"
+  spec.metadata['source_code_uri'] = 'https://github.com/tranquilthink/typed-parameter'
+  spec.metadata['changelog_uri'] = 'https://github.com/tranquilthink/typed-parameter/blob/master/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
