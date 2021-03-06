@@ -138,9 +138,9 @@ example_params = {
   integers: ['1','2','3','4'], 
   child: { name: "child" },
   childs: [ 
-    { name: "child1" },
-    { name: "child2" },
-    { name: "child3" }
+    { name: "child1", age: "10" },
+    { name: "child2", age: "12" },
+    { name: "child3", age: "15" }
   ]
 }
 
