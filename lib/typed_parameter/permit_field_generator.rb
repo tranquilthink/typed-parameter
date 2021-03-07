@@ -1,7 +1,7 @@
 module TypedParameter
   module PermitFieldGenerator
     class << self
-      BASE_TYPES = TypedParameter::ParameterTypes::BASE_TYPES
+      BASE_TYPES = TypedParameter::ParameterTypes.types
 
       def generate(name, type)
         props = generate_properties(type)

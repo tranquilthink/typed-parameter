@@ -2,9 +2,6 @@ module TypedParameter
   module Swagger
     module TypeGenerator
       class << self
-        BASE_TYPES = TypedParameter::ParameterTypes::BASE_TYPES
-        CUSTOM_TYPES = TypedParameter::ParameterTypes::CUSTOM_TYPES
-
         def generate(type)
           return array_generate(type) if type.is_a? Array
           return hash_generate(type) if type.is_a? Hash

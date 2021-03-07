@@ -12,6 +12,7 @@ require 'typed_parameter/swagger/types'
 require 'typed_parameter/swagger/type_generator'
 require 'typed_parameter/swagger/property_generator'
 require 'typed_parameter/swagger/component_generator'
+
 module TypedParameter
   class Error < StandardError; end
 end
