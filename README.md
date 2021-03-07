@@ -119,7 +119,7 @@ end
 ~~~
 
 Example 4. array & nested parameters 
-
+---
 ~~~ruby
 class ParentParameter < TypedParameter::Base
   field :name, String
