@@ -2,7 +2,7 @@
 
 module TypedParameter
   module Constraints
-    class DateTimeConstraint < Base
+    class DatetimeConstraint < Base
       def self.value(value)
         value.to_datetime
       end

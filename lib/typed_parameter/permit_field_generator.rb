@@ -1,20 +1,20 @@
 module TypedParameter
   module PermitFieldGenerator
     class << self
-      BASE_TYPES = TypedParameter::ParameterTypes.types
-
       def generate(name, type)
-        props = generate_properties(type)
+        type_class = [type].flatten.first
 
-        props = [] if type.is_a?(Array) && type[0].in?(BASE_TYPES)
-        return name unless props
+        props = if type.is_a? Array
+                  type_class.in? TypedParameter::ParameterTypes.types ? [] : generate_properties(type_class)
+                else
+                  generate_properties(type_class)
+                end
 
-        [[name, props]].to_h
+        props ? [[name, props]].to_h : name
       end
 
       def generate_properties(type)
-        return if type.in? BASE_TYPES
-        return generate_properties(type[0]) if type.is_a? Array
+        return if type.in? TypedParameter::ParameterTypes.types
         return type.keys if type.is_a? Hash
 
         type.fields

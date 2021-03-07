@@ -3,18 +3,18 @@ module TypedParameter
     class << self
       def value(type, value)
         type_class = [type].flatten.first
-        array_type = type.is_a?(Array)
-        parameter_type = type_class < TypedParameter::Base
 
-        if parameter_type
-          array_type ? parameter_array(type_class, value) : type.permit(value)
+        if type_class < TypedParameter::Base
+          type.is_a?(Array) ? parameter_array(type_class, value) : type.permit(value)
         else
-          constraint = "TypedParameter::Constraints::#{type_class}Constraint".safe_constantize
+          constraint = TypedParameter::Constraints.get type_class.name.to_sym
           constraint ||= TypedParameter::Constraints::StringConstraint # Default
 
-          array_type ? constraint_array(constraint, value) : constraint.value(value)
+          type.is_a?(Array) ? constraint_array(constraint, value) : constraint.value(value)
         end
       end
+
+      private
 
       def parameter_array(parameter_class, values)
         values.map { |value| parameter_class.permit(value) }
