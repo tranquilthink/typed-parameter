@@ -1,4 +1,4 @@
-require 'typed_parameter/boolean' # For Booelan Class Define
+require 'typed_parameter/boolean.rb' # For Booelan Class Define
 
 require 'typed_parameter/version'
 require 'typed_parameter/parameter_types'

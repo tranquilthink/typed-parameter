@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # Dependencies
-  spec.add_dependency 'rails', '~> 6.1'
+  spec.add_dependency 'rails'
 
   # Test Dependencies
   spec.add_development_dependency 'rspec'

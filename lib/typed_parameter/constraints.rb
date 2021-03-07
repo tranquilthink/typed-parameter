@@ -25,5 +25,5 @@ TypedParameter::Constraints.register :Integer, TypedParameter::Constraints::Inte
 TypedParameter::Constraints.register :String, TypedParameter::Constraints::StringConstraint
 TypedParameter::Constraints.register :Float, TypedParameter::Constraints::FloatConstraint
 TypedParameter::Constraints.register :Date, TypedParameter::Constraints::DateConstraint
-TypedParameter::Constraints.register :Datetime, TypedParameter::Constraints::DatetimeConstraint
+TypedParameter::Constraints.register :DateTime, TypedParameter::Constraints::DateTimeConstraint
 TypedParameter::Constraints.register :Boolean, TypedParameter::Constraints::BooleanConstraint
