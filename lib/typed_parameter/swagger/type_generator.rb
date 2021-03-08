@@ -5,9 +5,9 @@ module TypedParameter
         def generate(type)
           return array_generate(type) if type.is_a? Array
           return hash_generate(type) if type.is_a? Hash
+          return { ref: type } if type < TypedParameter::Base
 
-          swagger_type = Swagger::Types[type.name.to_sym]
-          swagger_type&.value || { ref: type }
+          Swagger::Types[type.name.to_sym]&.value
         end
 
         def hash_generate(hash)
@@ -17,7 +17,7 @@ module TypedParameter
         end
 
         def array_generate(type)
-          { type: :array, items: generate(type[0]) } 
+          { type: :array, items: generate(type[0]) }
         end
       end
     end
