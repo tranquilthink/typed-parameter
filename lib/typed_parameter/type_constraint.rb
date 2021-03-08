@@ -7,7 +7,7 @@ module TypedParameter
         if type_class < TypedParameter::Base
           type.is_a?(Array) ? parameter_array(type_class, value) : type.permit(value)
         else
-          constraint = TypedParameter::Constraints.get type_class.name.to_sym
+          constraint = TypedParameter::Constraints[type_class.name.to_sym]
           constraint ||= TypedParameter::Constraints::StringConstraint # Default
 
           type.is_a?(Array) ? constraint_array(constraint, value) : constraint.value(value)

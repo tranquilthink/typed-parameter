@@ -2,7 +2,7 @@ module TypedParameter
   class Base
     class << self
       def field(name, type, **kargs)
-        initialize_permitted_fields(name, type)
+        initialize_permitted_fields(name, type) # Need to remove! we don't need strong_parameter's filter
         initialize_swagger_properties(name, type, kargs)
         initialize_constraints(name, type, kargs)
       end
@@ -10,7 +10,7 @@ module TypedParameter
       def permit(params)
         raise ArgumentError unless params.class <= ActionController::Parameters
 
-        use_constraints params.permit(fields)
+        use_constraints(params).permit! # will change to use_constraints(params).permit!
       end
 
       def fields
@@ -46,16 +46,18 @@ module TypedParameter
       end
 
       def use_constraints(params)
+        paramters = ActionController::Parameters.new
+
         __constraints.each do |name, type, options|
           value = params[name]
           raise RequiredFieldError, "(#{self.name}) #{name} is required" if options[:required] && !value.present?
           next unless value.present?
 
-          params[name] = TypeConstraint.value(type, value)
-          params[name] = EnumConstraint.value(value, options[:enum]) if options[:enum]
+          paramters[name] = TypeConstraint.value(type, value)
+          paramters[name] = EnumConstraint.value(value, options[:enum]) if options[:enum]
         end
 
-        params
+        paramters
       end
 
       def __fields

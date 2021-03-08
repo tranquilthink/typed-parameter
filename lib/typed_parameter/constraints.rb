@@ -14,7 +14,7 @@ module TypedParameter
         @constraints[key] = constraint
       end
 
-      def get(name)
+      def [](name)
         @constraints[name].freeze
       end
     end

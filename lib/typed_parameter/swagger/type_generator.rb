@@ -6,7 +6,7 @@ module TypedParameter
           return array_generate(type) if type.is_a? Array
           return hash_generate(type) if type.is_a? Hash
 
-          swagger_type = "TypedParameter::Swagger::Types::#{type.name}Type".safe_constantize
+          swagger_type = Swagger::Types[type.name.to_sym]
           swagger_type&.value || { ref: type }
         end
 
