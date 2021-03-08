@@ -163,10 +163,76 @@ end
 ~~~
 Example 4. CustomType
 ------
-...
+If You want to use your custom type like Email, just create two file.
+- your type file. like "Email"
+- yout type constant. like "EmailConstrant"
+
+~~~ruby
+class Email
+  def initialize(value)
+    @email = value
+  end
+end
+
+class EmailConstrant
+ class << self
+  EMAIL_REGREX = //
+
+  # using convert value to your type
+  def value(value)
+    raise ArgumentError unless EMAIL_REGREX.match? value
+
+    Email.new(value)
+  end
+ end
+end
+
+# Register your type to typed-parameter when application initialize.
+TypedParameter::ParameterTypes.register Email
+TypedParameter::Constants.register :Email, EmailConstrant
+~~~
 
 Example 5. Swaggerize
 ------
+With Rswag(https://github.com/rswag/rswag), you can swaggerize your parameter types.
+
+~~~ruby
+class SwaggerParameter < TypedParameter::Base
+  field :string, String, enum: ["one", "two"], description: "String Field"
+  field :integer, Integer, description: "Integer Field"
+  field :ref_field, SwaggerRefParameter
+end
+
+class SwaggerRefParameter < TypedParameter::Base
+  field :string, String, description: "Ref String Field"
+end
+
+SwaggerParameter.swagger_properties
+# =>
+# { 
+#  string: { type: :string, enum: ["one", "two" ], description: "String Field" }, 
+#  integer: { type: :integer, description: "Integer Field" },
+#  ref_field: { "$ref": "#/components/schemas/SwaggerRefParamter" }
+# }
+# 
+
+# Add Components in your swagger
+# in swagger_helper
+components = TypedParameter::Swagger::ComponentGenerator.generate_all!
+
+config.swagger_docs = {
+    'v1/swagger.yaml' => {
+      openapi:    '3.0.1',
+      # ..., 
+      components: {
+        schemas: {
+          **components
+        }
+      }
+      #...
+    }
+  }
+~~~
 ...
 
 
