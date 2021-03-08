@@ -145,7 +145,7 @@ example_params = {
 }
 
 def parent_and_childs_params
-  ParentParams.permit(example_params)
+  ParentParameter.permit(example_params)
 end
 
 # Result
