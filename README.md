@@ -187,9 +187,18 @@ class EmailConstrant
  end
 end
 
+class EmailSwaggerType
+  class << self
+    def value
+      { type: :string }
+    end
+  end
+end
+
 # Register your type to typed-parameter when application initialize.
 TypedParameter::ParameterTypes.register Email
 TypedParameter::Constants.register :Email, EmailConstrant
+TypedParameter::Swagger::Types.register :Email, EmailSwaggerType
 ~~~
 
 Example 5. Swaggerize
