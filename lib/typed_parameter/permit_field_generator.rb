@@ -5,7 +5,7 @@ module TypedParameter
         type_class = [type].flatten.first
 
         props = if type.is_a? Array
-                  type_class.in? TypedParameter::ParameterTypes.types ? [] : generate_properties(type_class)
+                  type_class.in?(TypedParameter::ParameterTypes.types) ? [] : generate_properties(type_class)
                 else
                   generate_properties(type_class)
                 end
