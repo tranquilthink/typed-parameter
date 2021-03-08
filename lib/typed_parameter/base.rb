@@ -48,7 +48,7 @@ module TypedParameter
       def use_constraints(params)
         __constraints.each do |name, type, options|
           value = params[name]
-          raise ArgumentError, "(#{self.name}) #{name} is required" if options[:required] && !value.present?
+          raise RequiredFieldError, "(#{self.name}) #{name} is required" if options[:required] && !value.present?
           next unless value.present?
 
           params[name] = TypeConstraint.value(type, value)

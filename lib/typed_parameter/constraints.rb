@@ -3,7 +3,7 @@ require 'typed_parameter/constraints/integer_constraint'
 require 'typed_parameter/constraints/float_constraint'
 require 'typed_parameter/constraints/string_constraint'
 require 'typed_parameter/constraints/date_constraint'
-require 'typed_parameter/constraints/datetime_constraint'
+require 'typed_parameter/constraints/date_time_constraint'
 require 'typed_parameter/constraints/boolean_constraint'
 
 module TypedParameter
