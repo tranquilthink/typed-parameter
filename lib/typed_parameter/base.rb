@@ -41,7 +41,7 @@ module TypedParameter
 
       def initialize_constraints(name, type, kargs)
         options = kargs.slice(:enum, :required)
-
+        options[:enum] = options[:enum].map(&:to_s) if options[:enum]
         __constraints << [name, type, options]
       end
 
