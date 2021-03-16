@@ -1,15 +1,15 @@
 require File.expand_path("#{File.dirname(__FILE__)}/spec_helper")
 
 class TodoCreateParameter < TypedParameter::Base
-  field :content, String
-  field :done, Boolean
-  field :user_id, Integer
-  field :due_date, Date
+  field :content, String, required: true
+  field :done, Boolean, required: true
+  field :user_id, Integer, required: true
+  field :due_date, Date, required: true
 end
 
 describe 'TodoCreateParameter' do
   it 'has content and done fields' do
-    expect(TodoCreateParameter.fields).to eq %i[content done user_id due_date]
+    expect(TodoCreateParameter.constraints.map(&:first)).to eq %i[content done user_id due_date]
   end
 
   it 'has swagger properties' do
@@ -21,6 +21,10 @@ describe 'TodoCreateParameter' do
         due_date: { type: :string, format: :date }
       }
     )
+  end
+
+  it 'has required properties' do
+    expect(TodoCreateParameter.swagger_requirements).to eq(%i[content done user_id due_date])
   end
 
   it 'constraint type to parameters' do
