@@ -201,7 +201,25 @@ TypedParameter::Constants.register :Email, EmailConstrant
 TypedParameter::Swagger::Types.register :Email, EmailSwaggerType
 ~~~
 
-Example 5. Swaggerize
+Example 5. Use Inline Block
+------
+You can use parameter class by block
+
+~~~ruby
+class BlockParameter < TypedParameter::Base
+  field :some_object, Object do |i|
+    i.field :name, String
+    i.field :type, String
+  end
+  
+  field :other_hash_list, [Hash] do |i|
+    i.field :index, Integer
+    i.field :value, Float
+  end
+end
+~~~
+
+Example 6. Swaggerize
 ------
 With Rswag(https://github.com/rswag/rswag), you can swaggerize your parameter types.
 
