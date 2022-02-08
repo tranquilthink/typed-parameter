@@ -2,8 +2,26 @@ module TypedParameter
   class Base
     class << self
       def field(name, type, **kargs)
-        initialize_constraints(name, type, kargs)
-        initialize_swagger_properties(name, type, kargs)
+        if block_given? 
+          raise Error::InvalidBlockParameter unless [type].flatten[0].in?([Hash, Object])
+          
+          block_param_name = "#{self.to_s}_Partial_#{name.to_s.camelize}" 
+          class_eval("class ::#{block_param_name} < ::TypedParameter::Base; end")
+          block_param = block_param_name.constantize
+          yield(block_param)
+
+          if type.is_a?(Array)
+            target = [block_param]
+          else
+            target = block_param
+          end
+        else
+          target = type
+        end
+
+
+        initialize_constraints(name, target, kargs)
+        initialize_swagger_properties(name, target, kargs)
       end
 
       def permit(params)
@@ -50,9 +68,8 @@ module TypedParameter
 
         __constraints.each do |name, type, options|
           value = params[name]
-          if options[:required] && (value.nil? || value == '' || (value.is_a?(Array) && value.empty?))
-            raise Error::RequiredFieldError, "(#{self.name}) #{name} is required"
-          end
+          raise Error::RequiredFieldError, "(#{self.name}) #{name} is required" if options[:required] && empty_value?(value)
+
           next unless value.present?
 
           typed_params[name] = TypeConstraint.value(type, value)
@@ -60,6 +77,10 @@ module TypedParameter
         end
 
         typed_params
+      end
+
+      def empty_value?(value)
+        value.nil? || value == '' || (value.is_a?(Array) && value.empty?)
       end
 
       def __constraints

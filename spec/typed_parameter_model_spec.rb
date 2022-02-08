@@ -7,6 +7,13 @@ class TodoCreateParameter < TypedParameter::Base
   field :due_date, Date, required: true
 end
 
+class InlineParameter < TypedParameter::Base
+  field :person, Hash do |i| # Block을 통해 파라미터를 검증할 수 있다.
+    i.field :name, String
+    i.field :age, Integer
+  end
+end
+
 describe 'TodoCreateParameter' do
   it 'has content and done fields' do
     expect(TodoCreateParameter.constraints.map(&:first)).to eq %i[content done user_id due_date]
@@ -44,5 +51,19 @@ describe 'TodoCreateParameter' do
     expect(TodoCreateParameter.permit(params)[:done]).to eq false
     expect(TodoCreateParameter.permit(params)[:user_id]).to eq 3
     expect(TodoCreateParameter.permit(params)[:due_date].class).to eq Date
+  end
+end
+
+describe 'InlineParameter' do
+  it 'constraint type to parameters' do
+    params = ActionController::Parameters.new({
+                                                person: { 
+                                                  name:  'TEST',
+                                                  age:     '20'
+                                                }
+                                              })
+
+    expect(InlineParameter.permit(params)[:person][:name]).to eq 'TEST'
+    expect(InlineParameter.permit(params)[:person][:age]).to eq 20
   end
 end

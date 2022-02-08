@@ -4,7 +4,7 @@ module TypedParameter
   module Constraints
     class DateConstraint < Base
       def self.value(value)
-        value.to_date
+        value.to_time.to_date
       end
     end
   end
