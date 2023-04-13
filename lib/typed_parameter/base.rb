@@ -25,7 +25,7 @@ module TypedParameter
       end
 
       def permit(params)
-        raise Error::ParameterError unless params.class <= ActionController::Parameters
+        raise Error, "params class must be ActionController::Parameters" unless params.class <= ActionController::Parameters
 
         use_constraints(params).permit!
       end
