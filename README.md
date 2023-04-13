@@ -1,5 +1,5 @@
 # typed_parameter
-Create typed parameter class using strong paramter in rails.
+Create typed parameter class using strong parameter in rails.
 You can cleanup parameter code for permit in your controller and convert it to the type you want.
 You can get your OpenAPI JSON for parameter schemas.
 
