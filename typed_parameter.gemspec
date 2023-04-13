@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name                  = 'typed-parameter'
   spec.version               = TypedParameter::VERSION
   spec.authors               = ['Minwoo Jo']
-  spec.email                 = ['tranquilthink@example.com']
+  spec.email                 = ['tranquilthink@gmail.com']
   spec.summary               = 'Typed Paramter For Rails'
   spec.description           = 'Create typed parameter class using strong paramter in rails'
   spec.homepage              = 'https://github.com/tranquilthink/typed-parameter'

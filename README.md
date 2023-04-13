@@ -24,7 +24,7 @@ Or install it yourself as:
 Example 1. Type convert
 -----
 ~~~ruby
-class UserCreateParams < TypedParamter::Base
+class UserCreateParams < TypedParameter::Base
   field :name, String
   field :age, Integer
   field :email, String
@@ -273,5 +273,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/typed-parameter.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tranquilthink/typed-parameter.
 
